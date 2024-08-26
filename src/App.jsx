@@ -1,45 +1,47 @@
-import { useEffect, useState } from 'react'
-import TodoList from './components/TodoList'
-import Navbar from './components/Navbar';
+import React, { useState } from 'react'
+import Navbar from './components/Navbar'
 
 const App = () => {
 
   const [todos, setTodos] = useState([]);
-  const [newTodo, setNewTodo] = useState("");
+  const [todo, setTodo] = useState("");
 
-  useEffect(() => {
-    const savedTodos = JSON.parse(localStorage.getItem("todos")) || [];
-    setTodos(savedTodos);
-  },[]);
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  },[todos])
-
-  const addTodo = () => {
-    if(newTodo.trim()){
-      setTodos([...todos, newTodo]);
-      setNewTodo("");
-    }
+  const handleAdd = () => {
+    setTodos([...todos, {todo, isDone: false}]);
+    console.log(todos);
   }
 
-  const deleteTodo = (index) => {
-    setTodos(todos.filter((_,i) => i !== index));
+  const handleEdit = () => {
+    console.log();
   }
 
-  const editTodo = (index, updatedTodo) => {
-    const updatedTodos = todos.map((todo,i) => (i === index ? updatedTodo : todo));
-    setTodos(updatedTodos);
+  const handleDelete = () => {
+    console.log();
   }
 
   return (
-    <div>
-      <h1>Todo App</h1>
+    <>
       <Navbar/>
-      <input type="text" value={newTodo} onChange={(e) => { setNewTodo(e.target.value) }}/>
-      <button onClick={addTodo}>Add a Todo</button>
-      <TodoList todos={todos} deleteTodo={deleteTodo} editTodo={editTodo}/>
-    </div>
+      <div className="container mx-auto my-5 rounded-xl p-5 bg-violet-100 min-h-[80vh]">
+        <div className="addTodoForm mb-2">
+          <h1 className='text-xl font-bold'>Add a Todo</h1>
+          <input className='w-1/2 rounded-md py-1' type="text" value={todo} onChange={(e) => setTodo(e.target.value)} />
+          <button className='bg-violet-800 hover:bg-violet-950 p-2 py-1 mx-2 text-white rounded-md' onClick={handleAdd}>Add</button>
+        </div>
+        <h1 className='text-xl font-bold'>My Todos</h1>
+        <div className="todos">
+          {todos.map(item => (
+            <>
+            <div className="todo flex">
+            <div className='text'>{item.todo}</div>
+            <button className='bg-blue-800 hover:bg-blue-950 p-2 py-1 mx-2 text-white rounded-md' onClick={handleEdit}>Edit</button>
+            <button className='bg-red-800 hover:bg-red-950 p-2 py-1 mx-2 text-white rounded-md' onClick={handleDelete}>Delete</button>
+          </div>
+          </>
+          ))}
+        </div>
+      </div>
+    </>
   )
 }
 

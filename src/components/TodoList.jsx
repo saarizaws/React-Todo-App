@@ -1,17 +1,11 @@
-import TodoItem from "./TodoItem";
-import { useState } from "react";
+import React from 'react'
 
-const TodoList = ({todos, deleteTodo, editTodo}) => {
-
+const TodoList = () => {
   return (
-    <>
-      <ul>
-        {todos.map((todo,index) => (
-            <TodoItem key={index} index={index} todo={todo} deleteTodo={deleteTodo} editTodo={editTodo}/>
-        ))}
-      </ul>
-    </>
-  );
-};
+    <div>
+      
+    </div>
+  )
+}
 
-export default TodoList;
+export default TodoList

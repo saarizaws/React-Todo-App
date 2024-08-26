@@ -1,36 +1,11 @@
-import React, { useState } from "react";
+import React from 'react'
 
-const TodoItem = ({ index, todo, deleteTodo, editTodo }) => {
-
-const [isEditing, setIsEditing] = useState(false)
-const [editedTodo, setEditedTodo] = useState(todo);
-
-    const handleEdit = () => {
-        if(editedTodo.trim()){
-            editTodo(index, editedTodo);
-            setIsEditing(false);
-        }
-    }
-
+const TodoItem = () => {
   return (
-    <>
-      <li>
-        {isEditing ? (
-            <>
-                <input type="text" value={editedTodo} onChange={(e) => setEditedTodo(e.target.value)}/>
-                <button onClick={handleEdit}>Save</button>
+    <div>
+      
+    </div>
+  )
+}
 
-            </>
-        ) : (
-            <>
-                <span>{todo}</span>
-                <button onClick={() => setIsEditing(true)}>Edit</button>
-                <button onClick={() => deleteTodo(index)}>Delete</button>
-            </>
-        )}
-      </li>
-    </>
-  );
-};
-
-export default TodoItem;
+export default TodoItem
