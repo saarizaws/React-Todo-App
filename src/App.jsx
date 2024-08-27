@@ -16,7 +16,7 @@ const App = () => {
   },[todos])
 
   const handleAdd = (id) => {
-    setTodos([...todos, {id: uuidv4(),todo, isDone: false, isEditing: false}]);
+    setTodos([...todos, {id: uuidv4(),todo, isDone: false}]);
   }
 
   const handleEdit = (e) => {
