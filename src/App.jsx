@@ -9,15 +9,15 @@ const App = () => {
 
   const handleAdd = () => {
     setTodos([...todos, {id: uuidv4(),todo, isDone: false}]);
-    console.log(todos);
   }
 
   const handleEdit = () => {
     console.log();
   }
 
-  const handleDelete = () => {
-    console.log();
+  const handleDelete = (e) => {
+    let index = todos.findIndex((item) => item.id === e.target.id);
+    setTodos(todos.filter((_,i) => i !== index));
   }
 
   const handleIsDone = (e) => {
@@ -39,12 +39,13 @@ const App = () => {
         </div>
         <h1 className='text-xl font-bold'>My Todos</h1>
         <div className="todos">
+          {todos.length === 0 && <div>No Todos to display</div>}
           {todos.map(item => (
-            <div key={item.todo} className="todo flex">
+            <div key={item.todo} className="todo flex gap-8 mt-2 border-solid border-2 border-gray-300 p-2">
             <div className={item.isDone ? "line-through" : ""}>{item.todo}</div>
             <input id={item.id} type="checkbox" value={item.isDone} onChange={handleIsDone}/>  
             <button className='bg-blue-800 hover:bg-blue-950 p-2 py-1 mx-2 text-white rounded-md' onClick={handleEdit}>Edit</button>
-            <button className='bg-red-800 hover:bg-red-950 p-2 py-1 mx-2 text-white rounded-md' onClick={handleDelete}>Delete</button>
+            <button id={item.id} className='bg-red-800 hover:bg-red-950 p-2 py-1 mx-2 text-white rounded-md' onClick={handleDelete}>Delete</button>
           </div>
           ))}
         </div>
